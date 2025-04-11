@@ -1,35 +1,44 @@
 # AI-Powered Text-to-Image Generation with Latent Diffusion
 
-This project implements a text-to-image generation system using a latent diffusion framework. It fine-tunes the CLIP model on the Flickr30k dataset to improve semantic understanding of natural language prompts, and leverages pre-trained components from CompVis and OpenAI to generate realistic images from text descriptions.
+This project demonstrates a text-to-image generation system built on **Latent Diffusion Models (LDM)**. It combines a fine-tuned **CLIP model** with pre-trained components (VAE, U-Net, scheduler) to generate high-quality images from text prompts. The goal is to bridge natural language and visual understanding using generative AI.
+
+---
+
+## Overview
+
+- **Goal**: Generate semantically accurate images from natural language prompts.
+- **Approach**: Fine-tune the CLIP model using image-caption pairs (Flickr30k) to improve text-image embedding alignment. Generate images using a latent diffusion pipeline with pre-trained components.
+- **Tech Stack**: PyTorch, Hugging Face Diffusers, Transformers, OpenAI CLIP.
 
 ---
 
 ## Project Highlights
 
-- Fine-tuned OpenAI CLIP using Flickr30k image-caption pairs for improved text-image alignment.
-- Built a complete image generation workflow using latent diffusion with VAE, U-Net, and a PNDM scheduler.
-- Extracted normalized text and image embeddings to optimize caption-image similarity matching.
-- Generated diverse images from prompts using Hugging Face’s `diffusers` and `transformers` libraries.
-- Achieved an 18% improvement in alignment accuracy after CLIP fine-tuning.
+- Fine-tuned OpenAI CLIP on Flickr30k (31k images, 158k captions) to enhance multimodal alignment.
+- Built a full image generation workflow using VAE, U-Net, and PNDM scheduler within a latent diffusion framework.
+- Used cosine similarity between normalized CLIP embeddings to pair captions with appropriate images.
+- Achieved an 18% improvement in text-image alignment scores post fine-tuning.
+- Generated coherent, diverse visual outputs from complex natural language prompts.
 
 ---
 
 ## Dataset: Flickr30k
 
-- 31,783 images
-- 158,915 human-written captions (approximately 5 per image)
-- Captions vary in length and subject matter, covering diverse real-world scenes
+- **Images**: 31,783 high-quality photographs
+- **Captions**: 158,915 natural language descriptions (5 per image)
+- **Diversity**: Captions vary in length, detail, and subject matter
+- Used for both training (CLIP fine-tuning) and evaluation (generation quality)
 
 ---
 
-## Pretrained Models
+## Pretrained Components
 
-| Model | Description |
-|-------|-------------|
-| **VAE** | Encodes and reconstructs images as latent vectors (CompVis/stable-diffusion-v1-4) |
-| **U-Net** | Denoises latent representations during diffusion (CompVis/stable-diffusion-v1-4) |
-| **CLIP** | Aligns text and image features for multimodal understanding (openai/clip-vit-base-patch32) |
-| **PNDM Scheduler** | Controls the noise schedule in the diffusion process |
+| Component | Source | Purpose |
+|-----------|--------|---------|
+| VAE | `CompVis/stable-diffusion-v1-4` | Encodes images into compressed latent space |
+| U-Net | `CompVis/stable-diffusion-v1-4` | Denoises latent vectors during generation |
+| CLIP | `openai/clip-vit-base-patch32` | Aligns image and text embeddings |
+| Scheduler | PNDM | Controls noise scheduling in the diffusion process |
 
 ---
 
@@ -37,9 +46,9 @@ This project implements a text-to-image generation system using a latent diffusi
 
 | File | Description |
 |------|-------------|
-| `eda_flickr30k.ipynb` | Exploratory data analysis and CLIP fine-tuning |
+| `eda_flickr30k.ipynb` | EDA and CLIP fine-tuning on Flickr30k |
 | `prompt_to_image_generation.ipynb` | Text-to-image generation using latent diffusion |
-| `generated_images/` | Sample output images paired with their prompts |
+| `generated_images/` | Sample generated outputs paired with prompts |
 
 ---
 
@@ -58,11 +67,11 @@ This project implements a text-to-image generation system using a latent diffusi
 
 This project is designed to run in Jupyter, Colab, or similar environments.
 
-1. Open the following notebooks in order:
-   - `eda_flickr30k.ipynb` (data preparation and CLIP fine-tuning)
-   - `prompt_to_image_generation.ipynb` (image generation)
+1. Open the notebooks in the following order:
+   - `eda_flickr30k.ipynb`: Preprocess data and fine-tune CLIP
+   - `prompt_to_image_generation.ipynb`: Run the image generation pipeline
 
-2. Follow inline instructions and use provided `pip install` commands as needed.
+2. Use the inline `pip install` cells if required. No additional setup or environment file is needed.
 
 ---
 
